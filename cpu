@@ -1,0 +1,76 @@
+repeat task.wait() until game:IsLoaded()
+if not game:IsLoaded() then game:IsLoaded():Wait(5) end
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
+local WindowFocusReleasedFunction = function()
+	RunService:Set3dRenderingEnabled(false)
+	setfpscap(30)
+	return
+end
+
+local WindowFocusedFunction = function()
+	RunService:Set3dRenderingEnabled(true)
+	setfpscap(30)
+	return
+end
+
+local Initialize = function()
+	UserInputService.WindowFocusReleased:Connect(WindowFocusReleasedFunction)
+	UserInputService.WindowFocused:Connect(WindowFocusedFunction)
+	return
+end
+Initialize()
+UserSettings():GetService("UserGameSettings").MasterVolume = 0
+local decalsyeeted = true
+local g = game
+local w = g.Workspace
+local l = g.Lighting
+local t = w.Terrain
+sethiddenproperty(l,"Technology",2)
+sethiddenproperty(t,"Decoration",false)
+t.WaterWaveSize = 0
+t.WaterWaveSpeed = 0
+t.WaterReflectance = 0
+t.WaterTransparency = 0
+l.GlobalShadows = 0
+l.FogEnd = 9e9
+l.Brightness = 0
+settings().Rendering.QualityLevel = 1;
+
+game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat,false)
+
+game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList,false)
+
+game:GetService("Lighting").GlobalShadows = false
+
+for key, object in pairs(workspace:GetDescendants()) do
+
+    if object:IsA("Part") or object:IsA("UnionOperation") or object:IsA("MeshPart") then
+
+        object.Material = Enum.Material.SmoothPlastic
+
+    elseif  (object:IsA("Texture") or object:IsA("Explosion") or object:IsA("ColorCorrectionEffect") or 
+
+                object:IsA("Atmosphere") or object:IsA("SunRaysEffect") or object:IsA("BlurEffect") or 
+
+                object:IsA("RainyStone") or object:IsA("Weather")  or object:IsA("BloomEffect")
+
+                or object:IsA("Lighting") or object:IsA("FogEnd") or object:IsA("DepthOfFieldEffect")) then
+
+        object:Destroy()
+
+    end
+end
+wait()
+pcall(function()
+    game.Players.LocalPlayer.CameraMaxZoomDistance = 0
+end)
+wait()
+pcall(function()
+    game.CoreGui:FindFirstChild("RobloxGui").Enabled = false
+end)
+wait()
+pcall(function()
+    game.CoreGui:FindFirstChild("TopBar").Enabled = false
+end)
